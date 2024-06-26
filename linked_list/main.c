@@ -3,8 +3,46 @@
 #include <stdio.h>
 
 int main(void) {
+    int value_0 = 0;
+    linked_list_t *list = new_linked_list(value_0);
+    if (list == NULL) {
+        return 1;
+    }
+    printf("list->head->value: %d\n", list->head->value);
+    printf("list->length: %d\n", list->length);
+
+    int value_1 = 1;
+    if (append(list, value_1) != 0) {
+        printf("`append()` to Linked List failed\n");
+        return 1;
+    }
+    printf("list->length: %d\n", list->length);
+
+    int value_2 = 2;
+    if (prepend(list, value_2) != 0) {
+        printf("`prepend()` to Linked List failed\n");
+        return 1;
+    }
+    printf("list->length: %d\n", list->length);
+    printf("list->head->value: %d\n", list->head->value);
+
+    int index = 0;
+    int get_val = 99;
+    if (get(list, index, &get_val) == 0) {
+        printf("Invalid index: %d\n", index);
+    } else {
+        printf("Item: %d at Index: %d\n", get_val, index);
+    }
+
+    free_linked_list(list);
+
+    return 0;
+}
+
+/*
+int main(void) {
     int value = 5;
-    int_node *list = get_linked_list(value);
+    int_node_t *list = get_linked_list(value);
     if (list == NULL) {
         return 1;
     }
@@ -63,3 +101,4 @@ int main(void) {
 
     return 0;
 }
+*/

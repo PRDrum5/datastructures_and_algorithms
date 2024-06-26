@@ -3,19 +3,25 @@
 
 #include <stddef.h>
 
-typedef struct int_node {
+typedef struct int_node_t {
     int value;
-    struct int_node *next;
-} int_node;
+    struct int_node_t *next;
+} int_node_t;
 
-int_node *get_linked_list(int value);
-void free_linked_list(int_node *node_start);
-int get_length(int_node *node);
-int get(int_node *node, int index, int *value);
-int prepend(int_node **node_start, int value);
-int append(int_node *node, int value);
-int insert_at(int_node **node, int value, int index);
-int remove_value(int_node **list_start, const int value);
-int remove_at(int_node **list_start, const int index, int *value);
+typedef struct {
+    int_node_t *head;
+    int length;
+} linked_list_t;
+
+linked_list_t *new_linked_list(const int value);
+void free_linked_list(linked_list_t *list);
+int get_length(linked_list_t const *const list);
+int append(linked_list_t *list, const int value);
+int prepend(linked_list_t *list, const int value);
+int get(linked_list_t *list, const int index, int *value);
+
+//  int insert_at(int_node_t **node, int value, int index);
+//  int remove_value(int_node_t **list_start, const int value);
+//  int remove_at(int_node_t **list_start, const int index, int *value);
 
 #endif // LINKED_LIST_H
