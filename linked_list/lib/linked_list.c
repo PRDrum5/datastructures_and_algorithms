@@ -110,31 +110,29 @@ int get(linked_list_t *list, const int index, int *value) {
     return number_of_returned_items;
 }
 
-/*
-int insert_at(int_node_t **list_start, int value, int index) {
-    int_node_t *node = *list_start;
-
+int insert_at(linked_list_t *list, const int value, const int index) {
     int status = 1;
     int pos = 0;
 
-    if ((list_start != NULL) && (node != NULL)) {
+    if ((list != NULL) && (list->head != NULL)) {
         if (0 == index) {
-            status = prepend(list_start, value);
+            status = prepend(list, value);
         } else {
-            while ((node->next != NULL) && (status == 1)) {
-                pos++;
-                if (pos == index) {
-                    int_node_t *new_node = malloc(sizeof(int_node_t));
-                    if (new_node != NULL) {
-                        new_node->next = node->next;
-                        new_node->value = value;
-                        node->next = new_node;
+            int_node_t *node = list->head;
+            int_node_t *insert_node = new_node(value);
 
+            if (insert_node != NULL) {
+                while (node->next != NULL) {
+                    pos++;
+                    if (pos == index) {
+                        insert_node->next = node->next;
+                        node->next = insert_node;
                         status = 0;
+                        break;
                     }
-                }
 
-                node = node->next;
+                    node = node->next;
+                }
             }
         }
     }
@@ -142,70 +140,76 @@ int insert_at(int_node_t **list_start, int value, int index) {
     return status;
 }
 
-int remove_value(int_node_t **list_start, const int value) {
-    int removal_count = 0;
-    int_node_t *node = *list_start;
-    int_node_t *next_node;
+int remove_at(linked_list_t *list, const int index, int *value) {
+    int status = 1;
+    int pos = 0;
 
-    if (node != NULL) {
-        if (node->value == value) {
-            if (node->next != NULL) {
-                *list_start = node->next;
-            } else {
-                *list_start = NULL;
-            }
-
-            removal_count++;
+    if ((list != NULL) && (list->length > index)) {
+        if (index == 0) {
+            *value = list->head->value;
+            list->head = list->head->next;
+            list->length--;
+            status = 0;
         } else {
-            while (node->next != NULL) {
-                next_node = node->next;
-                if (next_node->value == value) {
-                    node->next = next_node->next;
-                    removal_count++;
+            int_node_t *prev_node = list->head;
+            int_node_t *node = prev_node->next;
 
-                    free(next_node);
+            while (node != NULL) {
+                pos++;
+
+                if (pos == index) {
+                    // Grab the value.
+                    *value = node->value;
+
+                    // Make the previous node point past this one.
+                    prev_node->next = node->next;
+
+                    // Free this node.
+                    free(node);
+                    list->length--;
+
+                    // Mark success!
+                    status = 0;
 
                     break;
                 }
 
-                node = node->next;
+                prev_node = node;
+                node = prev_node->next;
+            }
+        }
+    }
+
+    return status;
+}
+
+int remove_value(linked_list_t *list, const int value) {
+    int removal_count = 0;
+    if ((list != NULL) && (list->length > 0)) {
+        // If it's the very first item...
+        if (list->head->value == value) {
+            list->head = list->head->next;
+            list->length--;
+            removal_count++;
+
+        } else {
+            int_node_t *prev_node = list->head;
+            int_node_t *node = prev_node->next;
+
+            while (node != NULL) {
+                if (node->value == value) {
+                    prev_node->next = node->next;
+                    free(node);
+                    list->length--;
+                    removal_count++;
+                    break;
+                }
+
+                prev_node = node;
+                node = prev_node->next;
             }
         }
     }
 
     return removal_count;
 }
-
-int remove_at(int_node_t **list_start, const int index, int *value) {
-    int status = 1;
-    int pos = 0;
-    int_node_t *node = *list_start;
-    int_node_t *next_node;
-
-    if (node != NULL) {
-        if (index == 0) {
-            *value = node->value;
-            *list_start = node->next;
-            status = 0;
-        } else {
-            while (node != NULL) {
-                pos++;
-
-                next_node = node->next;
-                if ((pos == index) && (status == 1)) {
-                    *value = next_node->value;
-                    node->next = next_node->next;
-
-                    status = 0;
-
-                    free(next_node);
-                }
-
-                node = node->next;
-            }
-        }
-    }
-
-    return status;
-}
-    */

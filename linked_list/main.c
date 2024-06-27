@@ -8,97 +8,69 @@ int main(void) {
     if (list == NULL) {
         return 1;
     }
-    printf("list->head->value: %d\n", list->head->value);
-    printf("list->length: %d\n", list->length);
 
     int value_1 = 1;
     if (append(list, value_1) != 0) {
         printf("`append()` to Linked List failed\n");
         return 1;
     }
-    printf("list->length: %d\n", list->length);
 
     int value_2 = 2;
     if (prepend(list, value_2) != 0) {
         printf("`prepend()` to Linked List failed\n");
         return 1;
     }
-    printf("list->length: %d\n", list->length);
-    printf("list->head->value: %d\n", list->head->value);
+
+    int insert_idx = 2;
+    int insert_value = 42;
+    if (insert_at(list, insert_value, insert_idx) != 0) {
+        printf("`insert_at` failed\n");
+    }
+
+    int_node_t *node = list->head;
+    printf("Full Linked List\n");
+    for (int i = 0; i < list->length; i++) {
+        printf("Index: %d\tValue: %d\n", i, node->value);
+        node = node->next;
+    }
 
     int index = 0;
-    int get_val = 99;
+    int get_val = -1;
     if (get(list, index, &get_val) == 0) {
         printf("Invalid index: %d\n", index);
     } else {
-        printf("Item: %d at Index: %d\n", get_val, index);
+        printf("Value at index {%d} is: {%d}\n", index, get_val);
     }
 
-    free_linked_list(list);
-
-    return 0;
-}
-
-/*
-int main(void) {
-    int value = 5;
-    int_node_t *list = get_linked_list(value);
-    if (list == NULL) {
-        return 1;
+    int remove_val = 42;
+    printf("Remove the value %d\n", remove_val);
+    if (remove_value(list, remove_val) != 1) {
+        printf("`remove_value()` failed\n");
     }
 
-    int prepend_value = 10;
-    if (prepend(&list, prepend_value) != 0) {
-        return 1;
+    node = list->head;
+    printf("Full Linked List\n");
+    for (int i = 0; i < list->length; i++) {
+        printf("Index: %d\tValue: %d\n", i, node->value);
+        node = node->next;
     }
 
-    int append_value = 1;
-    if (append(list, append_value) != 0) {
-        return 1;
-    }
-
-    printf("%d\n", list->value);
-    printf("%d\n", list->next->value);
-    printf("%d\n", list->next->next->value);
-
-    printf("Linked List Length: %d\n", get_length(list));
-
-    int found_value;
-    int idx = 2;
-    if (get(list, idx, &found_value) != 0) {
-        printf("`get()` failed\n");
-        return 1;
-    } else {
-        printf("Found value at %d: %d\n", idx, found_value);
-    }
-
-    idx = 1;
-    if (insert_at(&list, 42, idx) != 0) {
-        printf("`insert_at()` failed\n");
-        return 1;
-    }
-
-    int drop_val = 1;
-    if (remove_value(&list, drop_val) == 0) {
-        printf("Value not removed or not found\n");
-    } else {
-        printf("%d\n", list->value);
-        printf("%d\n", list->next->value);
-        printf("%d\n", list->next->next->value);
-    }
-
-    int val = 99;
-    idx = 1;
-    if (remove_at(&list, idx, &val) != 0) {
+    index = 0;
+    remove_val = -1;
+    if (remove_at(list, index, &remove_val) != 0) {
         printf("`remove_at()` failed\n");
     } else {
-        printf("Extracted value: %d\n", val);
-        printf("%d\n", list->value);
-        printf("%d\n", list->next->value);
+        printf("Removed item: %d from Index: %d\n", remove_val, index);
+    }
+
+    node = list->head;
+    printf("Full Linked List\n");
+    for (int i = 0; i < list->length; i++) {
+        printf("Index: %d\tValue: %d\n", i, node->value);
+        node = node->next;
     }
 
     free_linked_list(list);
 
     return 0;
 }
-*/
