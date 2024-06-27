@@ -127,6 +127,7 @@ int insert_at(linked_list_t *list, const int value, const int index) {
                     if (pos == index) {
                         insert_node->next = node->next;
                         node->next = insert_node;
+                        list->length++;
                         status = 0;
                         break;
                     }

@@ -21,11 +21,13 @@ int main(void) {
         return 1;
     }
 
+    printf("Before insert, length now: %d\n", list->length);
     int insert_idx = 2;
     int insert_value = 42;
     if (insert_at(list, insert_value, insert_idx) != 0) {
         printf("`insert_at` failed\n");
     }
+    printf("inserted at 2, length now: %d\n", list->length);
 
     int_node_t *node = list->head;
     printf("Full Linked List\n");
