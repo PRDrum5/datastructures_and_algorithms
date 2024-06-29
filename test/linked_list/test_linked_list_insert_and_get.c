@@ -57,8 +57,8 @@ void test_insert_at_linked_list(void) {
     const int value_at_0 = 1;
     int index = 0;
     int status = insert_at(list, value_at_0, index);
-    TEST_ASSERT_EQUAL(2, list->length);
     TEST_ASSERT_EQUAL(0, status);
+    TEST_ASSERT_EQUAL(2, list->length);
 
     int gotten_value = -1;
     int n_returns = -1;
@@ -112,8 +112,13 @@ void test_insert_at_linked_list(void) {
     TEST_ASSERT_EQUAL(1, n_returns);
     TEST_ASSERT_EQUAL(v, gotten_value);
 
-    const int value_out_of_bounds = 99;
+    const int value_at_end = 99;
     index = 4;
+    status = insert_at(list, value_at_end, index);
+    TEST_ASSERT_EQUAL(0, status);
+
+    const int value_out_of_bounds = 99;
+    index = 10;
     status = insert_at(list, value_out_of_bounds, index);
     TEST_ASSERT_EQUAL(1, status);
 

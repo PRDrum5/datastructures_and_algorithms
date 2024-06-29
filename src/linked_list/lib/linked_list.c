@@ -114,9 +114,11 @@ int insert_at(linked_list_t *list, const int value, const int index) {
     int status = 1;
     int pos = 0;
 
-    if ((list != NULL) && (list->head != NULL)) {
+    if ((list != NULL) && (list->head != NULL) && (index <= list->length)) {
         if (0 == index) {
             status = prepend(list, value);
+        } else if (list->length == index) {
+            status = append(list, value);
         } else {
             int_node_t *node = list->head;
             int_node_t *insert_node = new_node(value);
@@ -147,9 +149,14 @@ int remove_at(linked_list_t *list, const int index, int *value) {
 
     if ((list != NULL) && (list->length > index)) {
         if (index == 0) {
-            *value = list->head->value;
-            list->head = list->head->next;
+            int_node_t *remove_node = list->head;
+
+            *value = remove_node->value;
+            list->head = remove_node->next;
             list->length--;
+
+            free(remove_node);
+
             status = 0;
         } else {
             int_node_t *prev_node = list->head;
@@ -189,10 +196,12 @@ int remove_value(linked_list_t *list, const int value) {
     if ((list != NULL) && (list->length > 0)) {
         // If it's the very first item...
         if (list->head->value == value) {
-            list->head = list->head->next;
+            int_node_t *remove_node = list->head;
+            list->head = remove_node->next;
             list->length--;
-            removal_count++;
 
+            free(remove_node);
+            removal_count++;
         } else {
             int_node_t *prev_node = list->head;
             int_node_t *node = prev_node->next;
