@@ -19,8 +19,9 @@ static bool binary_search_split(
     int const *const arr, const int v, int l, int r) {
     bool found = false;
 
-    int m = ((r - l) / 2) + l;
     if (l != r) {
+        int m = ((r - l) / 2) + l;
+
         if (v == arr[m]) {
             found = true;
         } else if (v > arr[m]) {
