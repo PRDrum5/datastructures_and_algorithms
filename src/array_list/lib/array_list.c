@@ -11,6 +11,8 @@ array_list_t *new_array_list(const size_t capacity) {
 
         array->head = (int *)malloc(sizeof(int) * capacity);
         if (array->head == NULL) {
+            // Free the array_list_t struct we allocated earlier
+            free(array);
             array = NULL;
         }
     }
