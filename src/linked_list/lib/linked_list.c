@@ -1,5 +1,4 @@
 #include "linked_list.h"
-#include <stdio.h>
 #include <stdlib.h>
 
 static int_node_t *new_node(const int value) {
