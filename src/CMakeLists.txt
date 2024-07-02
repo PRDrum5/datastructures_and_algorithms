@@ -1,6 +1,7 @@
 add_subdirectory(array_list)
 add_subdirectory(linked_list)
 add_subdirectory(queue)
+add_subdirectory(ring_buffer)
 add_subdirectory(stack)
 add_subdirectory(search)
 add_subdirectory(sort)
