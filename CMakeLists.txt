@@ -7,6 +7,7 @@ set(CMAKE_C_STANDARD_REQUIRED true)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 add_subdirectory(src)
+add_subdirectory(apps)
 
 include(CTest)
 add_subdirectory(external)
