@@ -3,15 +3,17 @@
 #include "queue.h"
 
 void test_peek(void) {
-    const int first_in = 0;
-    queue_t *queue = new_queue(first_in);
+    queue_t *queue = new_queue();
     TEST_ASSERT_NOT_NULL(queue);
-    TEST_ASSERT_NOT_NULL(queue->head);
-    TEST_ASSERT_NOT_NULL(queue->head);
-    TEST_ASSERT_EQUAL(1, queue->length);
+    TEST_ASSERT_NULL(queue->head);
+    TEST_ASSERT_NULL(queue->head);
+    TEST_ASSERT_EQUAL(0, queue->length);
 
     int value = 99;
-    int status = peek(queue, &value);
+    const int first_in = 0;
+    int status = enqueue(queue, first_in);
+    TEST_ASSERT_EQUAL(0, status);
+    status = peek(queue, &value);
     TEST_ASSERT_EQUAL(0, status);
     TEST_ASSERT_EQUAL(first_in, value);
 

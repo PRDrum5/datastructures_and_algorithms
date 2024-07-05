@@ -9,13 +9,12 @@ static int_q_node_t *new_q_node(const int value) {
     return node;
 }
 
-queue_t *new_queue(const int value) {
+queue_t *new_queue(void) {
     queue_t *q = malloc(sizeof(queue_t));
-    int_q_node_t *node = new_q_node(value);
 
-    q->head = node;
-    q->tail = node;
-    q->length = 1;
+    q->head = NULL;
+    q->tail = NULL;
+    q->length = 0;
 
     return q;
 }

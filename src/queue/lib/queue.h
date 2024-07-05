@@ -14,7 +14,7 @@ typedef struct {
     int length;
 } queue_t;
 
-queue_t *new_queue(const int value);
+queue_t *new_queue(void);
 int delete_queue(queue_t *q);
 int enqueue(queue_t *q, int value);
 int dequeue(queue_t *q, int *value);

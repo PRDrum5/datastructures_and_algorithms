@@ -3,18 +3,20 @@
 #include "queue.h"
 
 void test_dequeue(void) {
-    const int first_in = 0;
-    queue_t *queue = new_queue(first_in);
+    queue_t *queue = new_queue();
     TEST_ASSERT_NOT_NULL(queue);
-    TEST_ASSERT_NOT_NULL(queue->head);
-    TEST_ASSERT_NOT_NULL(queue->head);
+    TEST_ASSERT_NULL(queue->head);
+    TEST_ASSERT_NULL(queue->head);
 
+    const int first_in = 0;
+    int status = enqueue(queue, first_in);
+    TEST_ASSERT_EQUAL(0, status);
     TEST_ASSERT_EQUAL(1, queue->length);
     TEST_ASSERT_EQUAL(first_in, queue->head->value);
     TEST_ASSERT_EQUAL(first_in, queue->tail->value);
 
     const int second_in = 1;
-    int status = enqueue(queue, second_in);
+    status = enqueue(queue, second_in);
     TEST_ASSERT_EQUAL(0, status);
     TEST_ASSERT_EQUAL(2, queue->length);
     TEST_ASSERT_EQUAL(first_in, queue->head->value);

@@ -3,10 +3,10 @@
 #include <stdio.h>
 
 int main(void) {
-    int value = 0;
-    queue_t *q = new_queue(value);
+    queue_t *q = new_queue();
 
-    if (enqueue(q, ++value) != 0) {
+    int value = 0;
+    if (enqueue(q, value) != 0) {
         printf("Enqueue error\n");
     } else {
         printf("Queue Length: %d\n", q->length);
