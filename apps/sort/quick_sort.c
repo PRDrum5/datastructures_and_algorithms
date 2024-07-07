@@ -1,4 +1,4 @@
-#include "bubble.h"
+#include "quick.h"
 #include <stdbool.h>
 #include <stdio.h>
 
@@ -23,7 +23,7 @@ int main(void) {
 
     print_arr(arr, LEN);
 
-    bubble_sort(arr, LEN);
+    quick_sort(arr, LEN);
 
     print_arr(arr, LEN);
 
