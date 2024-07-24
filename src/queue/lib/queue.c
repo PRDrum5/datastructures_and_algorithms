@@ -24,17 +24,19 @@ int delete_queue(queue_t *q) {
     int_q_node_t *next_node;
 
     if (q->head != NULL) {
-        node = q->head;
+        if (q->head != NULL) {
+            node = q->head;
 
-        while (node->next != NULL) {
-            next_node = node->next;
+            while (node->next != NULL) {
+                next_node = node->next;
+                free(node);
+                node = next_node;
+                q->length--;
+            }
+
             free(node);
-            node = next_node;
             q->length--;
         }
-
-        free(node);
-        q->length--;
     }
 
     int length = q->length;
