@@ -1,5 +1,4 @@
 #include "trees.h"
-#include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -18,6 +17,20 @@ void free_tree(int_tree_node_t *node) {
         free_tree(node->right);
         free(node);
     }
+}
+
+bool compare_trees(
+    int_tree_node_t const *const a, int_tree_node_t const *const b) {
+
+    if ((a == NULL) && (b == NULL)) {
+        return true;
+    } else if ((a == NULL) || (b == NULL)) {
+        return false;
+    } else if (a->value != b->value) {
+        return false;
+    }
+
+    return compare_trees(a->left, b->left) && compare_trees(a->right, b->right);
 }
 
 static void visit_preorder(int_tree_node_t const *const node) {

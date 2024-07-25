@@ -21,6 +21,19 @@ int main(void) {
     int status = depth_search(root, 21, &found);
     printf("found? %d\n", found);
 
+    int_tree_node_t *second_tree = new_tree_node(17);
+    second_tree->left = new_tree_node(23);
+    second_tree->right = new_tree_node(3);
+
+    second_tree->left->left = new_tree_node(5);
+    second_tree->left->right = new_tree_node(4);
+
+    second_tree->right->left = new_tree_node(18);
+
+    bool identical_trees = compare_trees(root, second_tree);
+
+    printf("Trees are identical? %d\n", identical_trees);
+
     free_tree(root);
 
     return 0;
