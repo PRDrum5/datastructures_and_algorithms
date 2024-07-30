@@ -2,9 +2,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int_tree_node_t *new_tree_node(const int value) {
+int_tree_node_t *new_tree_node(const int value, int_tree_node_t *parent) {
     int_tree_node_t *node = (int_tree_node_t *)malloc(sizeof(int_tree_node_t));
     node->value = value;
+    node->parent = parent;
     node->left = NULL;
     node->right = NULL;
 
