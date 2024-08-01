@@ -24,5 +24,35 @@ int main(void) {
     get_min_heap(priority_queue, &value);
     printf("min value: %d\n", value);
 
+    int d_value = 0;
+    if (poll(priority_queue, &d_value) == 0) {
+        printf("Delete value: %d\n", d_value);
+        get_min_heap(priority_queue, &value);
+        printf("new min value: %d\n", value);
+    }
+
+    d_value = 0;
+    if (poll(priority_queue, &d_value) == 0) {
+        printf("Delete value: %d\n", d_value);
+        get_min_heap(priority_queue, &value);
+        printf("new min value: %d\n", value);
+    }
+
+    d_value = 0;
+    if (poll(priority_queue, &d_value) == 0) {
+        printf("Delete value: %d\n", d_value);
+        get_min_heap(priority_queue, &value);
+        printf("new min value: %d\n", value);
+    }
+
+    d_value = 0;
+    if (poll(priority_queue, &d_value) == 0) {
+        printf("Delete value: %d\n", d_value);
+        get_min_heap(priority_queue, &value);
+        printf("new min value: %d\n", value);
+    }
+
+    delete_priority_queue(priority_queue);
+
     return 0;
 }

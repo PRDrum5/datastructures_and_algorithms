@@ -1,4 +1,5 @@
 #include "array_list.h"
+#include <stdbool.h>
 #include <stdlib.h>
 #include <string.h>
 
@@ -28,6 +29,16 @@ void delete_array_list(array_list_t *array) {
         free(array);
     }
     return;
+}
+
+bool is_initalized(array_list_t const *const array) {
+    bool init = false;
+    if (array != NULL) {
+        if (array->head != NULL) {
+            init = true;
+        }
+    }
+    return init;
 }
 
 int push(array_list_t *const array, const int value) {
